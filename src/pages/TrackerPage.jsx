@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
+import { useGetRemoteJobsQuery } from "../features/jobs/jobsApi";
 
 function TrackerPage() {
-  return (
-    <div>TrackerPage</div>
-  )
+  const { data, isLoading, isError } = useGetRemoteJobsQuery();
+console.log(data);
+
+  return <div>Hello</div>;
 }
 
-export default TrackerPage
+export default TrackerPage;

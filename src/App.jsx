@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { useGetRemoteJobsQuery } from "./features/jobs/jobsApi";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Jobs from "./pages/Jobs";
 import JobsDetails from "./pages/JobsDetails";
 import TrackerPage from "./pages/TrackerPage";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home";
 
 function App() {
-  // const { data } = useGetRemoteJobsQuery();
-  // console.log(data);
-
   return (
-    <>
-      <BrowserRouter>
+    <div className="h-screen w-screen min-w-screen ">
+      <Header />
+      <div className="h-11/12 w-screen">
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/:id" element={<JobsDetails />} />
           <Route path="/tracker" element={<TrackerPage />} />
         </Routes>
-      </BrowserRouter>
-      <h1>Hello World</h1>
-    </>
+      </div>
+      <Footer />
+    </div>
   );
 }
 
