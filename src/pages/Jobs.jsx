@@ -2,6 +2,7 @@ import React from "react";
 import { useGetRemoteJobsQuery } from "../features/jobs/jobsApi";
 import Container from "../components/Container/Container";
 import JobsCard from "../components/JobsCard";
+import Loading from "../components/Loading";
 
 function Jobs() {
   const { data, isLoading, isError } = useGetRemoteJobsQuery();
@@ -9,9 +10,10 @@ function Jobs() {
   return (
     <div className="w-screen m-auto h-[90%] pt-20 pb-20 overflow-scroll overflow-x-hidden">
       {isLoading && (
-        <div className="flex justify-center items-center w-full h-full">
-          <h1 className="font-extrabold font-serif"> Loading..... </h1>
-        </div>
+        <Loading
+        color={"pink"}
+        secColor={"blue"}
+        />
       )}
       {!isLoading && (
         <div className="flex flex-wrap gap-3.5">

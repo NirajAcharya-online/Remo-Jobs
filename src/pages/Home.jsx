@@ -4,6 +4,7 @@ import { useSearchJobsQuery } from "../features/jobs/jobsApi";
 import JobsCard from "../components/JobsCard";
 import Error from "../components/Error";
 import useDebounce from "../components/Hooks/Debounce";
+import Loading from "../components/Loading";
 
 function Home() {
   const [value, setValue] = useState("");
@@ -30,13 +31,7 @@ function Home() {
         </div>
       </div>
 
-      <div>
-        {isLoading && (
-          <h2 className="font-bold font-sans text-xl text-center mt-1">
-            Loading..
-          </h2>
-        )}
-      </div>
+      <div>{isLoading && <Loading color={"red"} secColor={"blue"} />}</div>
       {error && <Error message={"Something went wrong"} />}
       {value.length < 3 && jobs.length === 0 ? (
         <h2 className="font-bold font-sans text-xl text-center mt-1">
@@ -47,15 +42,15 @@ function Home() {
           {jobs?.map((job) => (
             <JobsCard key={job.id} job={job} />
           ))}
+          {jobs.length === 0 && value.length > 3 && !isLoading ? (
+            <Error
+              message={"NO JOBS FOUND ACCORDING TO YOUR SEARCH"}
+              navigateto={navigate}
+            />
+          ) : (
+            <></>
+          )}
         </div>
-      )}
-      {jobs.length === 0 && value.length > 3 ? (
-        <Error
-          message={"NO JOBS FOUND ACCORDING TO YOUR SEARCH"}
-          navigateto={navigate}
-        />
-      ) : (
-        <></>
       )}
     </div>
   );

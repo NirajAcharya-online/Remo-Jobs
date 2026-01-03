@@ -1,14 +1,20 @@
 import React, { useId } from "react";
+import { Link, useNavigate } from "react-router-dom";
 function JobsCard({ job }) {
+  const navigate = useNavigate();
   const { id, salary, company_logo, company_name, job_type, tags, title } = job;
   const newTags = tags.slice(0, 5);
-  const handleClick = () => {};
+  const handleClick = () => {
+   navigate(`/jobs/${id}`)
+  };
   if (company_name && salary) {
     return (
       <>
         <div
+          onClick={() => {
+            handleClick();
+          }}
           className="w-1/2 h-fit flex justify-center m-auto p-12 border border-blue-400 rounded-2xl hover:scale-105 hover:delay-100 cursor-pointer bg-gray-300  font-serif "
-          onClick={handleClick()}
         >
           <div>
             <img

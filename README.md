@@ -1,16 +1,41 @@
-# React + Vite
+# Job Search App (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A frontend job listing and search application built with **React**, **Redux Toolkit Query**, and **Tailwind CSS**.
 
-Currently, two official plugins are available:
+The app uses a **public jobs API** to fetch and display remote jobs, with debounced search and cached API responses for better performance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Job search with debounce
+- Separate pages for search and job listing
+- RTK Query for data fetching and caching
+- Loading and error state handling
+- Responsive UI with Tailwind CSS
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+- React (Vite)
+- Redux Toolkit + RTK Query
+- React Router DOM
+- Tailwind CSS
+
+---
+
+## Setup
+
+```bash
+git clone https://github.com/your-username/job-search-app.git
+cd job-search-app
+npm install
+npm run dev
+
+```
+
+Author
+
+Niraj Acharya
+
