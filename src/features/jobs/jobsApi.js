@@ -8,7 +8,10 @@ export const jobsApi = createApi({
     getRemoteJobs: builder.query({
       query: () => data.REMOTE_JOBS,
     }),
+    searchJobs: builder.query({
+      query: (keyword) => `${data.REMOTE_JOBS}?search=${keyword}`,
+    }),
   }),
 });
 
-export const { useGetRemoteJobsQuery } = jobsApi;
+export const { useGetRemoteJobsQuery, useSearchJobsQuery } = jobsApi;

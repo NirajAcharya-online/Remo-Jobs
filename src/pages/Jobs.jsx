@@ -15,8 +15,8 @@ function Jobs() {
       )}
       {!isLoading && (
         <div className="flex flex-wrap gap-3.5">
-          {jobs.map((job) => (
-            <JobsCard key={job.id} job={job} />
+          {jobs?.map((job) => (
+            <JobsCard key={`remote-${job.id}`} job={job} />
           ))}
         </div>
       )}
