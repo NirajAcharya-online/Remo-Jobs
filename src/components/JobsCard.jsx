@@ -1,23 +1,50 @@
-import React, { useId } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useId, useState } from "react";
+import { CiHeart } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { deleteJobs, updateJobs } from "../features/tracker/trackerSlice";
 function JobsCard({ job }) {
   const navigate = useNavigate();
-  const { id, salary, company_logo, company_name, job_type, tags, title } = job;
+  const dispatch = useDispatch();
+  const { id, salary, company_logo, company_name, tags, title } = job;
+  const data = { id, salary, company_logo, company_name, tags, saved: false };
   const newTags = tags.slice(0, 5);
+  const savedJobs = useSelector((state) => state.tracker.savedJobs);
+  if (savedJobs.length > 0) {
+    savedJobs?.filter((job) => {
+      if (job.id === id) {
+        data.saved = true;
+      }
+    });
+  }
+  const handleSave = () => {
+    if (data.saved) {
+      dispatch(deleteJobs(id));
+    } else if (!data.saved) {
+      if (savedJobs.length === 0) {
+        dispatch(updateJobs(data));
+      }
+      savedJobs?.map((job) => {
+        if (job.id === job) {
+          return;
+        } else {
+          dispatch(updateJobs(data));
+        }
+      });
+    }
+  };
   const handleClick = () => {
-   navigate(`/jobs/${id}`)
+    navigate(`/jobs/${id}`);
   };
   if (company_name && salary) {
     return (
       <>
-        <div
-          onClick={() => {
-            handleClick();
-          }}
-          className="w-1/2 h-fit flex justify-center m-auto p-12 border border-blue-400 rounded-2xl hover:scale-105 hover:delay-100 cursor-pointer bg-gray-300  font-serif "
-        >
+        <div className="w-1/2 h-fit flex justify-center m-auto p-12 border border-blue-400 rounded-2xl hover:scale-105 hover:delay-100 cursor-pointer bg-gray-300  font-serif ">
           <div>
             <img
+              onClick={() => {
+                handleClick();
+              }}
               src={company_logo}
               alt={company_name}
               className="w-30 rounded-xl"
@@ -45,6 +72,14 @@ function JobsCard({ job }) {
                   </p>
                 ))}
               </span>
+              <div className="flex justify-end pr-6">
+                <CiHeart
+                  onClick={handleSave}
+                  size={"2rem"}
+                  color="white"
+                  fill={data.saved ? "red" : "white"}
+                />
+              </div>
             </div>
           </div>
         </div>

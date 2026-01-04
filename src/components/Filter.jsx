@@ -4,6 +4,7 @@ function Filter({ setCategory, setSelected }) {
   const handleClick = (e) => {
     setCategory(e.target.value);
     setSelected(true);
+    
   };
   const handleClear = () => {
     setCategory("");

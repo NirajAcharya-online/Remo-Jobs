@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React, { useState } from "react";
 
 function Button({
   children,
@@ -10,9 +10,15 @@ function Button({
 
   ...props
 }) {
+  const [selected, useSelected] = useState(false);
   return (
     <button
-      className={` ${className} rounded-lg ${bgColor} ${textColor}`}
+      className={` ${className} rounded-lg ${bgColor} ${textColor} 
+      ${selected ? "bg-blue-400" : ""}
+      `}
+      onClick={() => {
+        useSelected((prev) => !prev);
+      }}
       {...props}
     >
       {children}

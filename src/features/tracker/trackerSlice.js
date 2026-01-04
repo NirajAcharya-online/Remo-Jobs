@@ -7,6 +7,7 @@ const trackerSlice = createSlice({
   initialState,
   reducers: {
     updateJobs: (state, action) => {
+
       state.savedJobs.push(action.payload);
     },
     deleteJobs: (state, action) => {

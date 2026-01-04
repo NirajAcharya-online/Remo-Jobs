@@ -2,7 +2,7 @@ import React from "react";
 
 function Loading({ color, secColor }) {
   return (
-    <div className="flex w-full h-fit justify-center m-6" role="status">
+    <div className="flex w-full overflow-hidden h-fit justify-center m-6" role="status">
       <svg
         aria-hidden="true"
         className="w-18 h-18 text-neutral-tertiary animate-spin fill-brand"
