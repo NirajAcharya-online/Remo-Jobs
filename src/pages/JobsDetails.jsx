@@ -12,7 +12,10 @@ function JobsDetails() {
   const handleClick = () => {
     navigate("/jobs");
   };
-  const { data, isLoading, error } = useGetRemoteJobsQuery();
+  const { data, isLoading, error } = useGetRemoteJobsQuery({
+    selected: false,
+    category: "",
+  });
 
   const jobs = data?.jobs || [];
   const job = jobs?.filter((job) => {
@@ -20,18 +23,18 @@ function JobsDetails() {
   });
 
   return (
-    <div  className=" h-full w-full">
-      {error && (
-        <div className="h-60 w-screen">
-          <Error message={"Something Went Wrong "} />
-        </div>
-      )}
+    <div className=" h-full w-full">
       {isLoading && <Loading color={"blue"} secColor={"red"} />}
       <div className="ml-3 " onClick={handleClick}>
         <Button bgColor=" white " className="w-8 h-8 hover:cursor-pointer ">
           <IoArrowBackOutline className="h-8 w-8" />
         </Button>
       </div>
+      {error && (
+        <div className="h-60 w-screen">
+          <Error message={"Something Went Wrong "} />
+        </div>
+      )}
       {job && (
         <div className="h-11/12 w-screen">
           <JobDetailsCard data={job} />

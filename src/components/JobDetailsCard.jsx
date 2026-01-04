@@ -42,7 +42,7 @@ function JobDetailsCard({ data }) {
           {showDescription && (
             <Description
               className={
-                "max-w-11/12 m-auto p-4 h-96 overflow-y-scroll overflow-x-hidden font-serif"
+                "max-w-11/12 m-auto p-4 h-96 overflow-y-scroll overflow-x-hidden font-serif rounded-2xl shadow-2xl "
               }
               description={data[0].description}
             />

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function Error({ message, navigateto }) {
+function Error({ message, navigateto="/" }) {
   const naviagte = useNavigate();
   const handleClick = () => {
     naviagte(`${navigateto.link}`);
