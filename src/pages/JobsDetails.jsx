@@ -5,6 +5,7 @@ import { useGetRemoteJobsQuery } from "../features/jobs/jobsApi";
 import { IoArrowBackOutline } from "react-icons/io5";
 import Error from "../components/Error";
 import Loading from "../components/Loading";
+import JobDetailsCard from "../components/JobDetailsCard";
 function JobsDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -17,10 +18,9 @@ function JobsDetails() {
   const job = jobs?.filter((job) => {
     return job.id === Number(id);
   });
-  console.log(job);
 
   return (
-    <div div className=" h-full w-full">
+    <div  className=" h-full w-full">
       {error && (
         <div className="h-60 w-screen">
           <Error message={"Something Went Wrong "} />
@@ -32,7 +32,11 @@ function JobsDetails() {
           <IoArrowBackOutline className="h-8 w-8" />
         </Button>
       </div>
-      <div className="h-11/12 w-screen"></div>
+      {job && (
+        <div className="h-11/12 w-screen">
+          <JobDetailsCard data={job} />
+        </div>
+      )}
     </div>
   );
 }
