@@ -7,7 +7,15 @@ function JobsCard({ job }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id, salary, company_logo, company_name, tags, title } = job;
-  const data = { id, salary, company_logo, company_name, tags, saved: false };
+  const data = {
+    id,
+    salary,
+    company_logo,
+    company_name,
+    tags,
+    title,
+    saved: false,
+  };
   const newTags = tags.slice(0, 5);
   const savedJobs = useSelector((state) => state.tracker.savedJobs);
   if (savedJobs.length > 0) {
