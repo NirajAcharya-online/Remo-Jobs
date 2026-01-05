@@ -31,14 +31,9 @@ function JobsCard({ job }) {
     } else if (!data.saved) {
       if (savedJobs.length === 0) {
         dispatch(updateJobs(data));
+        return;
       }
-      savedJobs?.map((job) => {
-        if (job.id === job) {
-          return;
-        } else {
-          dispatch(updateJobs(data));
-        }
-      });
+      dispatch(updateJobs(data));
     }
   };
   const handleClick = () => {

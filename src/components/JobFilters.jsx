@@ -1,6 +1,6 @@
 import React from "react";
 
-function JobFilters({ activeCategory, onChange, setSelected }) {
+function JobFilters({ activeCategory, onChange }) {
   const CATEGORIES = [
     { label: "Software Development", value: "software-dev" },
     { label: "Design", value: "design" },
@@ -11,7 +11,6 @@ function JobFilters({ activeCategory, onChange, setSelected }) {
   ];
   const handleClick = (value) => {
     onChange(value);
-    setSelected(true);
   };
   return (
     <div className="flex flex-wrap gap-3 justify-center py-4">

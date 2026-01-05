@@ -6,10 +6,10 @@ export const jobsApi = createApi({
   }),
   endpoints: (builder) => ({
     getRemoteJobs: builder.query({
-      query: ({ selected, category }) => {
-        if (selected) return `${data.REMOTE_JOBS}?category=${category}`;
-        if (!selected) return data.REMOTE_JOBS;
-      },
+      query: (category) =>
+        category
+          ? `${data.REMOTE_JOBS}?category=${category}`
+          : data.REMOTE_JOBS,
     }),
     searchJobs: builder.query({
       query: (keyword) => `${data.REMOTE_JOBS}?search=${keyword}`,
