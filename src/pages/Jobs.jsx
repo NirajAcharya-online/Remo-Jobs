@@ -1,28 +1,54 @@
 import React, { useState } from "react";
 import { useGetRemoteJobsQuery } from "../features/jobs/jobsApi";
 import JobsCard from "../components/JobsCard";
-import Loading from "../components/Loading";
 import JobFilters from "../components/JobFilters";
 import Error from "../components/Error";
+import JobCardSkeleton from "../components/Skeleton/JobCardSkeleton";
+import FilterSkeleton from "../components/Skeleton/FilterSkeleton";
 
 function Jobs() {
   const [category, setCategory] = useState("all");
-  const { data, isLoading, error } = useGetRemoteJobsQuery(category, {
-    skip: !category,
-  });
+  const { data, isLoading, error, isFetching } =
+    useGetRemoteJobsQuery(category);
   const jobs = data?.jobs ?? [];
-  const loading = isLoading && jobs.length <= 0;
-  const isError = error && jobs.length <= 0;
-  const noJobs = !isLoading && jobs.length <= 0;
+
+  const uiState =
+    isLoading && !jobs.length === 0
+      ? "loading"
+      : error && !jobs.length === 0
+      ? "error"
+      : isFetching
+      ? "fetching"
+      : !isLoading && jobs.length === 0
+      ? "empty"
+      : "success";
+
   const navigate = {
     message: "Refresh Page",
     link: "/jobs",
   };
-  if (loading) {
-    return <Loading color={"pink"} secColor={"blue"} />;
+  if (uiState === "loading") {
+    return (
+      <div className="w-11/12 h-11/12 overflow-hidden  gap-0 pt-30 flex flex-col items-center ">
+        <FilterSkeleton />
+        {Array.from({ length: 3 }).map((_, i) => (
+          <JobCardSkeleton key={i} />
+        ))}
+      </div>
+    );
   }
-  if (isError) {
+  if (uiState === "error") {
     return <Error message={"Failed to Get Jobs"} navigateto={navigate} />;
+  }
+  if (uiState === "fetching") {
+    return (
+      <div className="w-11/12 h-11/12 gap-2 pt-30 overflow-hidden flex flex-col items-center ">
+        <FilterSkeleton />
+        {Array.from({ length: 3 }).map((_, i) => (
+          <JobCardSkeleton key={i} />
+        ))}
+      </div>
+    );
   }
 
   return (
@@ -32,7 +58,7 @@ function Jobs() {
           <JobFilters activeCategory={category} onChange={setCategory} />
 
           <div className="flex flex-wrap justify-start gap-3.5">
-            {noJobs && (
+            {uiState === "empty" && (
               <h2 className="text-center w-full font-bold p-4 text-3xl text-red-500 font-serif">
                 NO JOBS FOUND
               </h2>
