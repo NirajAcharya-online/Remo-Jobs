@@ -24,7 +24,7 @@ function Home() {
   const isIdle = debouncedSearch.length < 3;
   const hasJobs = jobs.length > 0;
   const isEmpty = !isLoading && !isFetching && !hasJobs && !isIdle;
-  const forSearch = !isIdle && !isFetching && jobs.length === 0;
+
   if (isLoading && !hasJobs) {
     return (
       <div className="h-11/12 w-11/12 flex-col flex gap-4 justify-center items-center">
@@ -34,7 +34,7 @@ function Home() {
       </div>
     );
   }
-  if (error || isEmpty) {
+  if (error) {
     return (
       <div className="h-11/12 w-11/12 flex justify-center items-center">
         <Error message={"Something Went Wrong"} navigateto={navigate} />;
@@ -63,29 +63,23 @@ function Home() {
           </div>
         </div>
       </div>
-      {forSearch&& (
+      {isIdle && (
         <h2 className="font-bold font-sans text-xl text-center p-4 text-green-400 shadow-2xl max-w-fit m-auto">
           Please Search for the job..!
         </h2>
       )}
-      {hasJobs && (
-        <>
-          <div className=" h-11/12 overflow-x-hidden flex flex-col gap-2 overflow-y-scroll">
-            <h2 className="font-bold font-sans text-xl text-center mt-1 text-blue-400">
-              Job Lists
-            </h2>
-            {jobs?.map((job) => (
-              <JobsCard key={job.id} job={job} />
-            ))}
-
-            {isEmpty && (
-              <Error
-                message="NO JOBS FOUND ACCORDING TO YOUR SEARCH"
-                navigateto={navigate}
-              />
-            )}
-          </div>
-        </>
+      {jobs && (
+        <div className=" h-11/12 overflow-x-hidden flex flex-col gap-2 overflow-y-scroll">
+          {jobs?.map((job) => (
+            <JobsCard key={job.id} job={job} />
+          ))}
+          {isEmpty && (
+            <Error
+              message="NO JOBS FOUND ACCORDING TO YOUR SEARCH"
+              navigateto={navigate}
+            />
+          )}
+        </div>
       )}
     </div>
   );

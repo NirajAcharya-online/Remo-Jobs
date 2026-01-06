@@ -45,12 +45,9 @@ function Jobs() {
   if (uiState === "fetching") {
     return (
       <div className="w-11/12 h-11/12 gap-2 pt-30 overflow-hidden flex flex-col items-center ">
-        <JobFilters
-          activeCategory={category}
-          onChange={(newCategory) => setSearchParams({ category: newCategory })}
-        />
-        {Array.from({ length: 3 }).map((_, i) => (
-          <JobCardSkeleton key={i} />
+        <FilterSkeleton />
+        {jobs?.map((job) => (
+        <JobsCard key={`remote-${job.id}`} job={job} />
         ))}
       </div>
     );
