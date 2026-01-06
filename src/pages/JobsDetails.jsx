@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { useGetRemoteJobsQuery } from "../features/jobs/jobsApi";
 import { IoArrowBackOutline } from "react-icons/io5";
-import Error from "../components/Error";
+import Error from "../components/Error.jsx";
 import JobDetailsCard from "../components/JobDetailsCard";
 import JobDescriptionSkeleton from "../components/Skeleton/JobDescriptionSkeleton";
 function JobsDetails() {
@@ -12,8 +12,7 @@ function JobsDetails() {
   const handleClick = () => {
     navigate("/jobs");
   };
-  const { data, isLoading, error } = useGetRemoteJobsQuery({
-    selected: false,
+  const { data, isLoading, error, refetch } = useGetRemoteJobsQuery({
     category: "",
   });
 
@@ -25,7 +24,7 @@ function JobsDetails() {
     return (
       <div className="h-full w-full ">
         <div className="h-60 w-screen">
-          <Error message={"Something Went Wrong "} />
+          <Error onRetry={refetch} />
         </div>
       </div>
     );

@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Input from "../components/Input";
 import { useSearchJobsQuery } from "../features/jobs/jobsApi";
 import JobsCard from "../components/JobsCard";
-import Error from "../components/Error";
+import Error from "../components/Error.jsx";
 import useDebounce from "../components/Hooks/Debounce";
-
 import JobCardSkeleton from "../components/Skeleton/JobCardSkeleton";
+import SearchForJob from "../components/SearchForJob";
+import NoJobsFoundState from "../components/NoJobsFound";
 
 function Home() {
   const [value, setValue] = useState("");
-  const navigate = {
-    link: "/jobs",
-    message: "Explore Jobs",
-  };
   const debouncedSearch = useDebounce(value.trim(), 200);
-  const { data, isLoading, error, isFetching } = useSearchJobsQuery(
+  const { data, isLoading, error, isFetching, refetch } = useSearchJobsQuery(
     debouncedSearch,
     {
       skip: debouncedSearch.length < 3,
     }
   );
-  const jobs = data?.jobs ?? [];
+  const jobs = data?.jobs || [];
   const isIdle = debouncedSearch.length < 4;
   const hasJobs = jobs.length > 0;
   const isEmpty = !isLoading && !isFetching && !hasJobs && !isIdle;
 
   if (isLoading && !hasJobs) {
     return (
-      <div className="h-11/12 w-11/12 flex-col flex gap-4 justify-center items-center">
+      <div className="h-11/12 w-11/12 flex-col flex gap-4 pl-20 pt-30 justify-center items-center">
         {Array.from({ length: 3 }).map((_, i) => (
           <JobCardSkeleton key={i} />
         ))}
@@ -37,7 +34,7 @@ function Home() {
   if (error) {
     return (
       <div className="h-11/12 w-11/12 flex justify-center items-center">
-        <Error message={"Something Went Wrong"} navigateto={navigate} />;
+        <Error onRetry={refetch} />;
       </div>
     );
   }
@@ -51,7 +48,7 @@ function Home() {
     );
   }
   return (
-    <div className="h-10/12 w-screen ">
+    <div className="h-10/12 w-screen  from-emerald-500 to-teal-400 ">
       <div className="h-30 pt-6 w-full  ">
         <div className="flex flex-col justify-center m-auto items-center gap-2 rounded-2xl ">
           <div className="flex gap-3 ">
@@ -63,22 +60,13 @@ function Home() {
           </div>
         </div>
       </div>
-      {isIdle && !hasJobs && (
-        <h2 className="font-bold font-sans text-xl text-center p-4 text-green-400 shadow-2xl max-w-fit m-auto">
-          Please Search for the job..!
-        </h2>
-      )}
+      {isIdle && !hasJobs && <SearchForJob />}
       {jobs && (
         <div className=" h-11/12 overflow-x-hidden flex flex-col gap-2 overflow-y-scroll">
           {jobs?.map((job) => (
             <JobsCard key={job.id} job={job} />
           ))}
-          {isEmpty && (
-            <Error
-              message="NO JOBS FOUND ACCORDING TO YOUR SEARCH"
-              navigateto={navigate}
-            />
-          )}
+          {isEmpty && <NoJobsFoundState />}
         </div>
       )}
     </div>

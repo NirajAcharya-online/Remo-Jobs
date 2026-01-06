@@ -5,10 +5,11 @@ import TrackerPage from "./pages/TrackerPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   return (
-    <div className="h-screen w-screen min-w-screen ">
+    <div className="h-screen w-screen min-w-screen   ">
       <Header />
       <div className="h-11/12 w-screen">
         <Routes>
@@ -16,6 +17,7 @@ function App() {
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/:id" element={<JobsDetails />} />
           <Route path="/tracker" element={<TrackerPage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
       <Footer />
