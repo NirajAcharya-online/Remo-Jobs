@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Button from "./Button";
-import Loading from "./Loading";
 import Description from "./Description";
 
 function JobDetailsCard({ data }) {
-  const [showDescription, setShowDescription] = useState(false);
+  const [showDescription, setShowDescription] = useState(true);
   const hanldleClick = () => {
     setShowDescription((prev) => !prev);
   };
@@ -50,8 +49,6 @@ function JobDetailsCard({ data }) {
         </div>
       </div>
     );
-  } else {
-    <Loading color={"red"} secColor={"blue"} />;
   }
 }
 

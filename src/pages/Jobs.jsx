@@ -5,9 +5,11 @@ import JobFilters from "../components/JobFilters";
 import Error from "../components/Error";
 import JobCardSkeleton from "../components/Skeleton/JobCardSkeleton";
 import FilterSkeleton from "../components/Skeleton/FilterSkeleton";
+import { useSearchParams } from "react-router-dom";
 
 function Jobs() {
-  const [category, setCategory] = useState("all");
+  const [searchParms, setSearchParams] = useSearchParams();
+  const category = searchParms.get("category") || "alL";
   const { data, isLoading, error, isFetching } =
     useGetRemoteJobsQuery(category);
   const jobs = data?.jobs ?? [];
@@ -43,7 +45,10 @@ function Jobs() {
   if (uiState === "fetching") {
     return (
       <div className="w-11/12 h-11/12 gap-2 pt-30 overflow-hidden flex flex-col items-center ">
-        <FilterSkeleton />
+        <JobFilters
+          activeCategory={category}
+          onChange={(newCategory) => setSearchParams({ category: newCategory })}
+        />
         {Array.from({ length: 3 }).map((_, i) => (
           <JobCardSkeleton key={i} />
         ))}
@@ -52,11 +57,15 @@ function Jobs() {
   }
 
   return (
-    <div className="w-screen m-auto h-[90%] pt-20 pb-20 overflow-scroll overflow-x-hidden">
+    <div className="w-11/12 m-auto  h-[90%] pt-30 pb-20 overflow-scroll overflow-x-hidden">
       {!isLoading && (
         <div className="flex flex-col">
-          <JobFilters activeCategory={category} onChange={setCategory} />
-
+          <JobFilters
+            activeCategory={category}
+            onChange={(newCategory) =>
+              setSearchParams({ category: newCategory })
+            }
+          />
           <div className="flex flex-wrap justify-start gap-3.5">
             {uiState === "empty" && (
               <h2 className="text-center w-full font-bold p-4 text-3xl text-red-500 font-serif">
