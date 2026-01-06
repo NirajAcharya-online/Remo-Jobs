@@ -21,7 +21,7 @@ function Home() {
     }
   );
   const jobs = data?.jobs ?? [];
-  const isIdle = debouncedSearch.length < 3;
+  const isIdle = debouncedSearch.length < 4;
   const hasJobs = jobs.length > 0;
   const isEmpty = !isLoading && !isFetching && !hasJobs && !isIdle;
 
@@ -63,7 +63,7 @@ function Home() {
           </div>
         </div>
       </div>
-      {isIdle && (
+      {isIdle && !hasJobs && (
         <h2 className="font-bold font-sans text-xl text-center p-4 text-green-400 shadow-2xl max-w-fit m-auto">
           Please Search for the job..!
         </h2>
