@@ -13,35 +13,41 @@ A production-style React application to search, filter, and explore remote jobs 
 
 ## 🚀 Live Demo
 
-Adding Soon...!
+(https://remo-jobs.vercel.app/)
 
 ---
 
 ## 🎯 Core Features
 
-- 🔍 Search jobs with debounce  
-  - avoids API spam  
-  - fetch starts only when query length ≥ 3  
+- 🔍 Search jobs with debounce
 
-- 🎚️ Category-based filtering  
-  - software, design, sales, product, finance, others  
+  - avoids API spam
+  - fetch starts only when query length ≥ 3
 
-- 📄 Job details page  
-  - opened using URL params  
+- 🎚️ Category-based filtering
 
-- ⏳ Skeleton loaders  
-  - different loaders for different pages  
+  - software, design, sales, product, finance, others
 
-- 🚨 Centralized error component  
-  - customizable message and navigation  
+- 📄 Job details page
 
-- ⚡ RTK Query caching  
-  - instant reload on revisit  
-  - prevents useless refetching  
+  - opened using URL params
 
-- 🧩 Clean separation of concerns  
-  - Search page and Filter page are independent  
-  - logic not mixed together  
+- ⏳ Skeleton loaders
+
+  - different loaders for different pages
+
+- 🚨 Centralized error component
+
+  - customizable message and navigation
+
+- ⚡ RTK Query caching
+
+  - instant reload on revisit
+  - prevents useless refetching
+
+- 🧩 Clean separation of concerns
+  - Search page and Filter page are independent
+  - logic not mixed together
 
 ---
 

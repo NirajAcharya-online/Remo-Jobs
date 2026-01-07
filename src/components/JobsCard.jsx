@@ -42,7 +42,7 @@ function JobsCard({ job }) {
   if (company_name && salary) {
     return (
       <>
-        <div className="w-1/2 h-fit flex justify-center m-auto p-12 border border-blue-400 rounded-2xl hover:scale-105 hover:delay-100 cursor-pointer bg-gray-300  font-serif  ">
+        <div className="min-w-1/2 max-w-fit h-fit flex justify-center m-auto p-12 border border-blue-400 rounded-2xl hover:scale-105 hover:delay-100 cursor-pointer bg-gray-300  font-serif  ">
           <div className="flex items-center justify-center w-full">
             <div>
               <img
