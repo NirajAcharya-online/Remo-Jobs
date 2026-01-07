@@ -1,8 +1,11 @@
 import React from "react";
-import DOMPurify from "dompurify";
+import { Interweave } from "interweave";
 function Description({ description, className = "" }) {
-  const cleanHtml = DOMPurify.sanitize(description);
-  return <div className={className} dangerouslySetInnerHTML={{ __html: cleanHtml }} />;
+  return (
+    <div className={className}>
+      <Interweave content={description} />
+    </div>
+  );
 }
 
 export default Description;
