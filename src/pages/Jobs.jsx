@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { useGetRemoteJobsQuery } from "../features/jobs/jobsApi";
 import JobsCard from "../components/JobsCard";
 import JobFilters from "../components/JobFilters";
@@ -64,10 +64,13 @@ function Jobs() {
                 <NoJobsFoundState from={true} />
               </div>
             )}
-            {!isLoading &&
-              jobs?.map((job) => (
-                <JobsCard key={`remote-${job.id}`} job={job} />
-              ))}
+            {!isLoading && (
+              <div className="flex flex-col justify-center w-full gap-4  ">
+                {jobs?.map((job) => (
+                  <JobsCard key={`remote-${job.id}`} job={job} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}

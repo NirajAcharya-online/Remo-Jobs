@@ -24,7 +24,7 @@ function Home() {
 
   if (isLoading && !hasJobs) {
     return (
-      <div className="h-11/12 w-11/12 flex-col flex gap-4 pl-20 pt-30 justify-center items-center">
+      <div className=" max-h-11/12 min-h-fit w-11/12 overflow-hidden flex-col flex gap-4 pl-20 pt-30 justify-center items-center">
         {Array.from({ length: 3 }).map((_, i) => (
           <JobCardSkeleton key={i} />
         ))}
@@ -40,7 +40,7 @@ function Home() {
   }
   if (isFetching) {
     return (
-      <div className="h-11/12 w-11/12 flex flex-col gap-4 justify-center items-center">
+      <div className="max-h-11/12 min-h-fit w-11/12 overflow-hidden flex-col flex gap-4 pl-20 pt-30 justify-center items-center">
         {Array.from({ length: 3 }).map((_, i) => (
           <JobCardSkeleton key={i} />
         ))}

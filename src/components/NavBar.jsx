@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 function NavBar() {
   return (
     <nav className="h-10 w-4/5 m-auto flex justify-center items-center">
