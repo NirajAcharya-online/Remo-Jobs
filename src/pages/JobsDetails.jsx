@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { useGetRemoteJobsQuery } from "../features/jobs/jobsApi";
 import { IoArrowBackOutline } from "react-icons/io5";
@@ -8,9 +8,8 @@ import JobDetailsCard from "../components/JobDetailsCard";
 import JobDescriptionSkeleton from "../components/Skeleton/JobDescriptionSkeleton";
 function JobsDetails() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/jobs");
+    window.history.back();
   };
   const { data, isLoading, error, refetch } = useGetRemoteJobsQuery({
     category: "",

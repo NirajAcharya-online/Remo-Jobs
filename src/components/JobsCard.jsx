@@ -1,4 +1,4 @@
-import React, { useId, useState } from "react";
+import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";

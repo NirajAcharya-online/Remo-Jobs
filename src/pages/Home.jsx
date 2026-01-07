@@ -62,11 +62,14 @@ function Home() {
       </div>
       {isIdle && !hasJobs && <SearchForJob />}
       {jobs && (
-        <div className=" h-11/12 overflow-x-hidden flex flex-col gap-2 overflow-y-scroll">
-          {jobs?.map((job) => (
-            <JobsCard key={job.id} job={job} />
-          ))}
-          {isEmpty && <NoJobsFoundState />}
+        <div className="max-h-11/12 min-h-1/2 overflow-x-hidden flex flex-col gap-2 overflow-y-scroll  ">
+          {isEmpty ? (
+            <div className="overflow-hidden">
+              <NoJobsFoundState />
+            </div>
+          ) : (
+            jobs?.map((job) => <JobsCard key={job.id} job={job} />)
+          )}
         </div>
       )}
     </div>

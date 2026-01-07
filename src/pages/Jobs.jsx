@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import { useGetRemoteJobsQuery } from "../features/jobs/jobsApi";
 import JobsCard from "../components/JobsCard";
 import JobFilters from "../components/JobFilters";
@@ -15,16 +15,15 @@ function Jobs() {
     useGetRemoteJobsQuery(category);
   const jobs = data?.jobs ?? [];
 
-  const uiState =
-    isLoading && !jobs.length === 0
-      ? "loading"
-      : error && !jobs.length === 0
-      ? "error"
-      : isFetching
-      ? "fetching"
-      : !isLoading && jobs.length === 0
-      ? "empty"
-      : "success";
+  const uiState = isLoading
+    ? "loading"
+    : error && !jobs.length === 0
+    ? "error"
+    : isFetching
+    ? "fetching"
+    : !isLoading && jobs.length === 0
+    ? "empty"
+    : "success";
   if (uiState === "loading") {
     return (
       <div className="w-11/12 h-11/12 overflow-hidden pl-20  gap-2 pt-35 flex flex-col items-center ">
@@ -50,7 +49,7 @@ function Jobs() {
   }
 
   return (
-    <div className="w-11/12 m-auto  h-[90%] pt-30 pb-20 overflow-scroll overflow-x-hidden">
+    <div className="w-11/12 m-auto  h-[90%] pt-30 pb-20 overflow-scroll overflow-x-hidden  scroll-smooth  ">
       {!isLoading && (
         <div className="flex flex-col">
           <JobFilters
