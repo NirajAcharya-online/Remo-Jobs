@@ -38,7 +38,7 @@ function JobsDetails() {
     );
   }
   return (
-    <div className=" h-full w-full">
+    <div className=" max-h-full w-full">
       <div className="ml-3 " onClick={handleClick}>
         <Button bgColor=" white " className="w-8 h-8 hover:cursor-pointer ">
           <IoArrowBackOutline className="h-8 w-8" />

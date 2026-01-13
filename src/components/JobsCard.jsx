@@ -1,39 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteJobs, updateJobs } from "../features/tracker/trackerSlice";
+import {
+  deleteSavedJob,
+  fetchSavedJobs,
+  updateSavedJobs,
+} from "../features/tracker/trackerSlice";
+import { BsThreeDots } from "react-icons/bs";
 function JobsCard({ job }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { id, salary, company_logo, company_name, tags, title } = job;
+  const user = useSelector((state) => state.user.userDetails);
+  const savedJobs = useSelector((state) => state.tracker.savedJobs);
+  const { id, salary, company_logo, company_name, tags, title, description } =
+    job;
+  const [showMessage, setShowMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
   const data = {
     id,
     salary,
+    description,
     company_logo,
     company_name,
     tags,
     title,
-    saved: false,
   };
   const newTags = tags.slice(0, 5);
-  const savedJobs = useSelector((state) => state.tracker.savedJobs);
-  if (savedJobs.length > 0) {
-    savedJobs?.filter((job) => {
-      if (job.id === id) {
-        data.saved = true;
+
+  const isSaved = savedJobs.some((j) => j.id === id);
+  const handleSave = async () => {
+    if (user) {
+      if (!data.saved) {
+        dispatch(updateSavedJobs({ user, job }));
+      } else {
+        dispatch(deleteSavedJob({ user, id }));
       }
-    });
-  }
-  const handleSave = () => {
-    if (data.saved) {
-      dispatch(deleteJobs(id));
-    } else if (!data.saved) {
-      if (savedJobs.length === 0) {
-        dispatch(updateJobs(data));
-        return;
-      }
-      dispatch(updateJobs(data));
+    } else {
+      setShowMessage(true);
     }
   };
   const handleClick = () => {
@@ -42,7 +46,16 @@ function JobsCard({ job }) {
   if (company_name && salary) {
     return (
       <>
-        <div className="min-w-1/2 max-w-fit h-fit flex justify-center m-auto p-12 border border-blue-400 rounded-2xl hover:scale-105 hover:delay-100 cursor-pointer bg-gray-300  font-serif  ">
+        <div className="min-w-full max-w-fit   h-fit flex justify-center flex-col m-auto p-12 border border-blue-400 rounded-2xl hover:scale-3d hover:bg-gray-400 hover:delay-100 cursor-pointer bg-gray-300  font-serif  ">
+          {showMessage && (
+            <>
+              <div className="flex items-center w-full justify-center">
+                <span className="font-bold text-xs font-mono text-red-500 text-center">
+                  Please Login to Save....!
+                </span>
+              </div>
+            </>
+          )}
           <div className="flex items-center justify-center w-full">
             <div>
               <img
@@ -67,7 +80,7 @@ function JobsCard({ job }) {
                   {newTags?.map((tag) => (
                     <p
                       className=" p-1 rounded-xl text-emerald-500"
-                      key={Math.random() + id}
+                      key={`${id}-${tag}`}
                     >
                       {tag}
                     </p>
@@ -84,9 +97,10 @@ function JobsCard({ job }) {
                     onClick={handleSave}
                     size={"2rem"}
                     color="white"
-                    fill={data.saved ? "red" : "white"}
+                    fill={isSaved ? "red" : "white"}
                   />
                 </div>
+                <div>{loading && <BsThreeDots />}</div>
               </div>
             </div>
           </div>

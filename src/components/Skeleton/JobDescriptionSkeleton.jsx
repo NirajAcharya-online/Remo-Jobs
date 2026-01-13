@@ -1,6 +1,6 @@
 const JobDescriptionSkeleton = () => {
   return (
-    <div className="max-w-3xl mx-auto flex flex-col gap-10 animate-pulse">
+    <div className="min-w-1/2 mx-auto flex flex-col gap-10 animate-pulse">
       <div className="flex items-center flex-col justify-center gap-6">
         <div className="w-20 h-20 bg-gray-300 rounded-xl" />
 
