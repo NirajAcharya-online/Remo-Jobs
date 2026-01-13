@@ -31,7 +31,7 @@ function JobsCard({ job }) {
   const isSaved = savedJobs.some((j) => j.id === id);
   const handleSave = async () => {
     if (user) {
-      if (!data.saved) {
+      if (!isSaved) {
         dispatch(updateSavedJobs({ user, job }));
       } else {
         dispatch(deleteSavedJob({ user, id }));

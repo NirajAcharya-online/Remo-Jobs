@@ -37,9 +37,9 @@ function Login() {
   };
   return (
     <>
-      <div className="flex items-center h-1/2 mt-30 justify-center p-2 shadow-2xl flex-col bg-transparent border-2 border-black rounded-2xl  w-1/2 m-auto ">
+      <div className="flex items-center h-10/12  justify-center flex-col w-1/2 m-auto ">
         <form
-          className="w-1/2   shadow-2xs flex flex-col items-center justify-center "
+          className="w-1/2 bg-transparent border-2 p-10 rounded-2xl  border-black h-fit shadow-2xs flex flex-col items-center justify-center "
           onSubmit={handleSubmit(handleSignIn)}
         >
           <h2 className="font-bold text-xl font-mono text-gray-500">

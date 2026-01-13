@@ -7,6 +7,7 @@ import useDebounce from "../components/Hooks/Debounce";
 import JobCardSkeleton from "../components/Skeleton/JobCardSkeleton";
 import SearchForJob from "../components/SearchForJob";
 import NoJobsFoundState from "../components/NoJobsFound";
+import { FourSquare } from "react-loading-indicators";
 
 function Home() {
   const [value, setValue] = useState("");
@@ -25,9 +26,12 @@ function Home() {
   if (isLoading && !hasJobs) {
     return (
       <div className=" max-h-11/12 min-h-fit w-11/12 overflow-hidden flex-col flex gap-4 pl-20 pt-30 justify-center items-center">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <JobCardSkeleton key={i} />
-        ))}
+        <FourSquare
+          color="#78896b"
+          size="large"
+          text="Getting Jobs"
+          textColor="#4dc418"
+        />
       </div>
     );
   }
@@ -41,9 +45,12 @@ function Home() {
   if (isFetching) {
     return (
       <div className="max-h-11/12 min-h-fit w-11/12 overflow-hidden flex-col flex gap-4 pl-20 pt-30 justify-center items-center">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <JobCardSkeleton key={i} />
-        ))}
+        <FourSquare
+          color="#78896b"
+          size="large"
+          text="Getting Jobs"
+          textColor="#4dc418"
+        />
       </div>
     );
   }
@@ -62,7 +69,7 @@ function Home() {
       </div>
       {isIdle && !hasJobs && <SearchForJob />}
       {jobs && (
-        <div className="max-h-11/12 min-h-1/2 overflow-x-hidden flex flex-col gap-2 overflow-y-scroll  ">
+        <div className="max-h-11/12 min-h-1/2 md:w-full sm:w-full m-auto lg:w-1/2 overflow-x-hidden flex flex-col gap-2 overflow-y-scroll  ">
           {isEmpty ? (
             <div className="overflow-hidden">
               <NoJobsFoundState />

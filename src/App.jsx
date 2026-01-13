@@ -15,27 +15,28 @@ import PrivateRoute from "./components/Authentication/PrivateRoute";
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
 import { fetchSavedJobs } from "./features/tracker/trackerSlice";
+import AuthListener from "./components/Hooks/AuthListstner";
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const unsub = onAuthStateChanged(firebaseAuth, (user) => {
-      if (user) {
-        dispatch(fetchSavedJobs(user));
-        dispatch(
-          setUser({
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-          })
-        );
-      } else {
-        dispatch(clearUser());
-      }
-    });
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const unsub = onAuthStateChanged(firebaseAuth, (user) => {
+  //     if (user) {
+  //       dispatch(fetchSavedJobs(user));
+  //       dispatch(
+  //         setUser({
+  //           uid: user.uid,
+  //           email: user.email,
+  //           displayName: user.displayName,
+  //         })
+  //       );
+  //     } else {
+  //       dispatch(clearUser());
+  //     }
+  //   });
 
-    return () => unsub();
-  }, [dispatch]);
+  //   return () => unsub();
+  // }, [dispatch]);
   return (
     <div className="h-screen w-screen min-w-screen   ">
       <Header />
