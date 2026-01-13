@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import LogOut from "./Authentication/LogOut";
+import LogOut from "./Authentication/Logout";
 function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
