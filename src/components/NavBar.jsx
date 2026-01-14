@@ -18,7 +18,7 @@ function NavBar() {
   const handleSignup = () => navigate("/signup");
 
   return (
-    <nav className="w-full max-w-6xl mx-auto flex items-center justify-between p-6 relative">
+    <nav className="w-full h-[20px] max-w-6xl mx-auto flex items-center justify-between p-6 relative">
       <AuthListener />
 
       <div className="text-lg font-bold text-blue-500">REMO-JOB</div>
