@@ -30,7 +30,6 @@ function Login() {
       );
       const { user } = response;
       if (user.accessToken) {
-        console.log("SUCESS");
         toast.success("Logged in sucessfully..!", {
           theme: "colored",
           autoClose: 1500,
