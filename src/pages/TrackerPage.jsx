@@ -22,21 +22,43 @@ function TrackerPage() {
     </div>;
   }
   return (
-    <div className="h-full md:w-full sm:w-full m-auto lg:w-1/2 overflow-y-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden overflow-x-hidden ">
+    <div className="w-full max-w-6xl mx-auto flex flex-col pt-6 pb-12 px-4 h-[90vh] overflow-y-auto scroll-smooth [&::-webkit-scrollbar]:hidden">
+      {loading && (
+        <div className="w-full h-full flex justify-center items-center mt-10">
+          <Slab
+            color="#234123"
+            size="medium"
+            text="Saved Jobs..."
+            textColor="#46c82f"
+          />
+        </div>
+      )}
+
+      {error && !loading && (
+        <div className="w-full flex justify-center items-center mt-10">
+          <Error />
+        </div>
+      )}
+
       {savedJobs.length > 0 && (
-        <h2 className="text-center p-6 m-6 text-2xl font-bold text-red-700">
+        <h2 className="text-center text-2xl sm:text-3xl font-bold text-red-700 mt-4 mb-6">
           Saved Jobs
         </h2>
       )}
-      <div className="m-5 flex flex-col justify-center gap-4">
-        {savedJobs.length === 0 && (
-          <h2 className="text-center p-6 m-6 text-2xl font-bold text-red-700">
-            No Jobs Saved
-          </h2>
-        )}
-        {savedJobs.length > 0 &&
-          savedJobs?.map((job) => <JobsCard key={job.title} job={job} />)}
-      </div>
+
+      {savedJobs.length === 0 && !loading && !error && (
+        <h2 className="text-center text-2xl sm:text-3xl font-bold text-red-700 mt-10">
+          No Jobs Saved
+        </h2>
+      )}
+
+      {savedJobs.length > 0 && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
+          {savedJobs.map((job) => (
+            <JobsCard key={job.title} job={job} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

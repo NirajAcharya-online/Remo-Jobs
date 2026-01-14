@@ -53,29 +53,31 @@ function Jobs() {
   }
 
   return (
-    <div className="md:w-full sm:w-full m-auto flex justify-center self-center lg:w-1/2 h-[90%] pt-30 pb-20 overflow-y-scroll overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth  ">
-      {!isLoading && (
-        <div className="flex flex-col">
-          <JobFilters
-            activeCategory={category}
-            onChange={(newCategory) =>
-              setSearchParams({ category: newCategory })
-            }
+    <div className="w-full max-w-6xl h-full mx-auto flex flex-col pt-6 pb-12 px-4 mt-7 overflow-y-auto scroll-smooth [&::-webkit-scrollbar]:hidden">
+      <JobFilters
+        activeCategory={category}
+        onChange={(newCategory) => setSearchParams({ category: newCategory })}
+      />
+      {uiState === "empty" && (
+        <div className="w-full flex justify-center mt-10">
+          <NoJobsFoundState from={true} />
+        </div>
+      )}
+      {jobs?.length > 0 && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center mt-3">
+          {jobs.map((job) => (
+            <JobsCard key={`remote-${job.id}`} job={job} />
+          ))}
+        </div>
+      )}
+      {(uiState === "loading" || uiState === "fetching") && (
+        <div className="w-full h-full flex justify-center items-center mt-10">
+          <FourSquare
+            color="#78896b"
+            size="large"
+            text="Getting Jobs"
+            textColor="#4dc418"
           />
-          <div className="flex flex-wrap justify-start gap-3.5">
-            {uiState === "empty" && (
-              <div className="h-fit w-fit m-auto">
-                <NoJobsFoundState from={true} />
-              </div>
-            )}
-            {!isLoading && (
-              <div className="flex flex-col justify-center w-full m-3 gap-4  ">
-                {jobs?.map((job) => (
-                  <JobsCard key={`remote-${job.id}`} job={job} />
-                ))}
-              </div>
-            )}
-          </div>
         </div>
       )}
     </div>

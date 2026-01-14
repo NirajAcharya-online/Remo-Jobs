@@ -53,28 +53,33 @@ function Home() {
       </div>
     );
   }
+
   return (
-    <div className="h-10/12 w-screen  from-emerald-500 to-teal-400 ">
-      <div className="h-30 pt-6 w-full  ">
-        <div className="flex flex-col justify-center m-auto items-center gap-2 rounded-2xl ">
-          <div className="flex gap-3 ">
-            <Input
-              placeholder="Search for job..."
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-            />
-          </div>
-        </div>
+    <div className="w-full h-11/12 flex flex-col items-center pt-6 pb-12">
+      <div className="w-full max-w-3xl flex justify-center mb-6">
+        <Input
+          placeholder="Search for job..."
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className="w-full text-center sm:w-[500px] lg:w-[600px]"
+        />
       </div>
       {isIdle && !hasJobs && <SearchForJob />}
-      {jobs && (
-        <div className="max-h-11/12 min-h-1/2 md:w-full sm:w-full m-auto lg:w-1/2 overflow-x-hidden flex flex-col gap-2 overflow-y-scroll  ">
+      {jobs && jobs.length > 0 && (
+        <div
+          className="w-full max-w-3xl flex flex-col gap-6 px-4 overflow-y-auto 
+                      [&::-webkit-scrollbar]:hidden -ms-overflow-style-none scrollbar-width-none"
+        >
           {isEmpty ? (
-            <div className="overflow-hidden">
+            <div className="w-full flex justify-center mt-10">
               <NoJobsFoundState />
             </div>
           ) : (
-            jobs?.map((job) => <JobsCard key={job.id} job={job} />)
+            jobs.map((job) => (
+              <div key={job.id} className="w-full flex justify-center">
+                <JobsCard job={job} />
+              </div>
+            ))
           )}
         </div>
       )}

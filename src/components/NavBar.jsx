@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import LogOut from "./Authentication/Logout";
 import AuthListener from "./Hooks/AuthListstner";
+
 function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const pathName = location.pathname;
   const user = useSelector((state) => state.user.userDetails);
   const showButtons = !user && pathName !== "/login" && pathName !== "/signup";
-  const handleLogin = () => {
-    navigate("/login");
-  };
-  const handleSignup = () => {
-    navigate("/signup");
-  };
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const handleLogin = () => navigate("/login");
+  const handleSignup = () => navigate("/signup");
+
   return (
-    <nav className="h-10 w-11/12 m-auto  flex justify-between  items-center">
+    <nav className="w-full max-w-6xl mx-auto flex items-center justify-between p-6 relative">
       <AuthListener />
-      <ul className="flex gap-20 p-2.5 text-blue-400 font-sans font-bold justify-center items-center  ">
-        <li className="hover:text-xl delay-150">
+
+      <div className="text-lg font-bold text-blue-500">REMO-JOB</div>
+
+      <ul className="hidden md:flex gap-8 text-blue-400 font-bold items-center">
+        <li className="hover:text-xl transition">
           <NavLink
             className={({ isActive }) => (isActive ? "text-red-400" : "")}
             to="/"
@@ -27,7 +32,7 @@ function NavBar() {
             Home
           </NavLink>
         </li>
-        <li className="hover:text-xl delay-150">
+        <li className="hover:text-xl transition">
           <NavLink
             className={({ isActive }) => (isActive ? "text-red-400" : "")}
             to="/jobs"
@@ -35,7 +40,7 @@ function NavBar() {
             Explore Jobs
           </NavLink>
         </li>
-        <li className="hover:text-xl delay-150">
+        <li className="hover:text-xl transition">
           <NavLink
             className={({ isActive }) => (isActive ? "text-red-400" : "")}
             to="/tracker"
@@ -45,34 +50,105 @@ function NavBar() {
         </li>
       </ul>
 
-      <div className="mt-2 flex items-center gap-10">
+      {/* Desktop Right Side */}
+      <div className="hidden md:flex items-center gap-4">
         {!showButtons && (
-          <h2 className=" text-center text-xs text-blue-400 font-bold ">
+          <span className="text-xs text-blue-400 font-bold">
             Welcome {user ? user.displayName : "Guest"}
-          </h2>
+          </span>
         )}
-        {user && (
-          <div>
-            <LogOut />
-          </div>
-        )}
+        {user && <LogOut />}
         {showButtons && (
-          <div className="">
+          <>
             <button
               onClick={handleLogin}
-              className="py-1 rounded-2xl border hover:scale-3d border-green-300 hover:bg-green-400 cursor-pointer font-serif px-3 bg-green-300 ml-2"
+              className="py-1 px-3 bg-green-300 border border-green-300 rounded-2xl hover:bg-green-400 transition"
             >
               Login
             </button>
             <button
               onClick={handleSignup}
-              className="py-1 rounded-2xl border border-blue-300  cursor-pointer font-serif px-3  ml-2"
+              className="py-1 px-3 bg-blue-300 border border-blue-300 rounded-2xl hover:bg-blue-400 transition"
             >
               Sign-Up
             </button>
-          </div>
+          </>
         )}
       </div>
+      <div className="md:hidden flex items-center">
+        <button onClick={toggleMenu} className="focus:outline-none">
+          <div
+            className="w-6 h-0.5 bg-blue-400 mb-1 transition-transform"
+            style={{
+              transform: isMenuOpen
+                ? "rotate(45deg) translate(5px, 5px)"
+                : "none",
+            }}
+          ></div>
+          <div
+            className={`w-6 h-0.5 bg-blue-400 mb-1 transition-opacity ${
+              isMenuOpen ? "opacity-0" : "opacity-100"
+            }`}
+          ></div>
+          <div
+            className="w-6 h-0.5 bg-blue-400 transition-transform"
+            style={{
+              transform: isMenuOpen
+                ? "rotate(-45deg) translate(6px, -6px)"
+                : "none",
+            }}
+          ></div>
+        </button>
+      </div>
+
+      {isMenuOpen && (
+        <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center md:hidden py-4 gap-4 z-50">
+          <NavLink
+            onClick={() => setIsMenuOpen(false)}
+            className="text-blue-400 font-bold"
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            onClick={() => setIsMenuOpen(false)}
+            className="text-blue-400 font-bold"
+            to="/jobs"
+          >
+            Explore Jobs
+          </NavLink>
+          <NavLink
+            onClick={() => setIsMenuOpen(false)}
+            className="text-blue-400 font-bold"
+            to="/tracker"
+          >
+            Saved Jobs
+          </NavLink>
+
+          {!showButtons && (
+            <span className="text-xs text-blue-400 font-bold">
+              Welcome {user ? user.displayName : "Guest"}
+            </span>
+          )}
+          {user && <LogOut />}
+          {showButtons && (
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={handleLogin}
+                className="py-1 px-4 bg-green-300 border rounded-2xl hover:bg-green-400 transition"
+              >
+                Login
+              </button>
+              <button
+                onClick={handleSignup}
+                className="py-1 px-4 bg-blue-300 border rounded-2xl hover:bg-blue-400 transition"
+              >
+                Sign-Up
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </nav>
   );
 }

@@ -41,24 +41,20 @@ export default function Signup() {
     watch,
     formState: { errors, isDirty, isSubmitting },
   } = useForm();
-
   return (
-    <div className="flex items-center h-10/12  justify-center flex-col w-1/2  m-auto ">
+    <div className="flex items-center justify-center h-full  px-4">
       <form
-        className=" lg:w-1/2 sm:w-full bg-transparent border-2 p-10 rounded-2xl  border-black h-fit shadow-2xs flex flex-col items-center justify-center "
+        className="w-full max-w-md bg-white border-2 border-gray-300 p-6 sm:p-8 rounded-2xl shadow-lg flex flex-col gap-4"
         onSubmit={handleSubmit(handleSignup)}
       >
-        <h2 className="font-bold text-xl font-mono text-gray-500 ">
+        <h2 className="text-center font-bold text-xl sm:text-2xl font-mono text-gray-700 mb-4">
           Please Signup
         </h2>
 
         <Input
           {...register("username", {
             required: "Username is required...",
-            minLength: {
-              value: 5,
-              message: "Must be at least 5 characters",
-            },
+            minLength: { value: 5, message: "Must be at least 5 characters" },
             pattern: {
               value: /^[A-Za-z0-9_]+$/,
               message: "Only letters, numbers, and underscores allowed",
@@ -73,6 +69,7 @@ export default function Signup() {
             {errors.username.message}
           </p>
         )}
+
         <Input
           {...register("email", {
             required: "Email is required...",
@@ -91,9 +88,10 @@ export default function Signup() {
             {errors.email.message}
           </p>
         )}
+
         <Input
           {...register("password", {
-            required: " Password is required...",
+            required: "Password is required...",
             pattern: {
               value:
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
@@ -107,15 +105,16 @@ export default function Signup() {
           autoComplete={"new-password"}
         />
         {errors.password && (
-          <p className="text-red-500 text-xs text-center mt-1" role="alert">
+          <p className="text-red-500 text-xs mt-1 text-center" role="alert">
             {errors.password.message}
           </p>
         )}
+
         <Input
           {...register("confirmPassword", {
             required: "Please Confirm Your Password",
             validate: (value) =>
-              value === watch("password") || "Password doesnot match",
+              value === watch("password") || "Password does not match",
           })}
           placeholder={"Confirm Your Password..."}
           type={"password"}
@@ -123,26 +122,33 @@ export default function Signup() {
           autoComplete={"off"}
         />
         {errors.confirmPassword && (
-          <p className="text-red-500 text-xs text-center mt-1" role="alert">
+          <p className="text-red-500 text-xs mt-1 text-center" role="alert">
             {errors.confirmPassword.message}
           </p>
         )}
+
         <button
-          className="py-2 rounded-2xl hover:bg-emerald-400-400 cursor-pointer font-serif px-3 bg-emerald-300 m-2 "
+          className={`mt-4 py-2 px-4 rounded-2xl font-serif text-white transition-colors 
+                    ${
+                      !isSubmitting
+                        ? "bg-emerald-500 hover:bg-emerald-600"
+                        : "bg-gray-300"
+                    }`}
           disabled={isSubmitting || !isDirty}
         >
           Sign-Up
         </button>
+
+        <div className="flex justify-center items-center gap-1 text-xs mt-4">
+          <span>Already have an account?</span>
+          <span
+            onClick={handleClick}
+            className="cursor-pointer text-blue-400 hover:underline"
+          >
+            Login
+          </span>
+        </div>
       </form>
-      <div className="text-xs flex gap-1 items-center">
-        <span>Donot have a account</span>
-        <span
-          onClick={handleClick}
-          className="cursor-pointer pl-0 p-3 text-blue-400"
-        >
-          Login
-        </span>
-      </div>
     </div>
   );
 }

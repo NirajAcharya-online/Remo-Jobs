@@ -12,7 +12,7 @@ function PrivateRoute({ children }) {
   }, []);
   if (loading) {
     return (
-      <div className="w-11/12 h-11/12 overflow-hidden pl-20  gap-2 pt-35 flex flex-col items-center ">
+      <div className="w-11/12  overflow-hidden pl-20  gap-2 pt-35 flex flex-col items-center ">
         <Slab
           color="#234123"
           size="medium"

@@ -16,7 +16,7 @@ function App() {
     <div className="h-screen w-full ">
       <AuthListener />
       <Header />
-      <div className="h-11/12 w-full m-auto">
+      <div className="h-10/12 w-full mb-0">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/jobs" element={<Jobs />} />

@@ -60,76 +60,57 @@ function JobsCard({ job }) {
   };
   if (company_name && salary) {
     return (
-      <>
-        <div className="min-w-full max-w-fit   h-fit flex justify-center flex-col m-auto p-12 border border-blue-400 rounded-2xl hover:scale-3d hover:bg-gray-400 hover:delay-100 cursor-pointer bg-gray-300  font-serif  ">
-          {showMessage && (
-            <>
-              <div className="flex items-center w-full justify-center">
-                <span className="font-bold text-xl font-mono text-red-500 text-center">
-                  Please Login to Save....!
+      <div className="w-full sm:w-[300px] md:w-[320px] lg:w-[340px] bg-white rounded-3xl shadow-lg p-5 hover:shadow-2xl transition-transform transform hover:scale-105 cursor-pointer font-sans flex flex-col">
+        {showMessage && (
+          <div className="w-full mb-2 text-center">
+            <span className="text-red-600 font-bold text-sm sm:text-base">
+              Please Login to Save!
+            </span>
+          </div>
+        )}
+        <div className="flex flex-col items-center gap-3">
+          <img
+            src={company_logo}
+            alt={company_name}
+            className="w-20 h-20 sm:w-24 sm:h-24 object-contain rounded-xl"
+          />
+          <div className="flex flex-col gap-1 w-full">
+            <h2 className="font-bold text-md sm:text-lg truncate">
+              👨‍💻 {title}
+            </h2>
+            <p className="text-gray-700 text-sm sm:text-base">
+              <span className="font-semibold">Company:</span> {company_name}
+            </p>
+            <p className="text-gray-700 text-sm sm:text-base">
+              <span className="font-semibold">Salary:</span> {salary}
+            </p>
+            <div className="flex flex-wrap gap-1 mt-2">
+              {newTags?.map((tag) => (
+                <span
+                  key={`${id}-${tag}`}
+                  className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full"
+                >
+                  {tag}
                 </span>
-              </div>
-            </>
-          )}
-          <div className="flex items-center justify-center w-full">
-            <div>
-              <img
-                src={company_logo}
-                alt={company_name}
-                className="w-30 rounded-xl"
-              />
+              ))}
             </div>
-            <div className="flex flex-col gap-2 max-w-fit min-w-11/12 ml-3 p-2 rounded-4xl">
-              <h2 className="font-bold pl-20">👨‍💻:{title}</h2>
-              <span className="pl-20 font-bold">
-                Company:
-                <span className="ml-2 font-medium">{company_name}</span>
-              </span>
-              <span className="pl-20 font-bold">
-                Salary:
-                <span className="ml-2 font-medium">{salary}</span>
-              </span>
-              <div>
-                <span className="flex gap-1 items-center rounded-2xl flex-wrap p-1 pl-20 border-2 border-blue-400 ">
-                  Tags:
-                  {newTags?.map((tag) => (
-                    <p
-                      className=" p-1 rounded-xl text-emerald-500"
-                      key={`${id}-${tag}`}
-                    >
-                      {tag}
-                    </p>
-                  ))}
-                </span>
-                <div className="flex gap-4 justify-end pr-6 m-1 items-center">
-                  <button
-                    onClick={handleClick}
-                    className="p-2 bg-green-300 hover:bg-green-400 m-1 rounded-2xl font-light cursor-pointer text-gray-900"
-                  >
-                    Details
-                  </button>
-                  <CiHeart
-                    onClick={handleSave}
-                    size={"2rem"}
-                    color="white"
-                    fill={isSaved ? "red" : "white"}
-                  />
-                </div>
-                <div>
-                  {loading && (
-                    <BlinkBlur
-                      color="#32cd32"
-                      size="small"
-                      text=""
-                      textColor=""
-                    />
-                  )}
-                </div>
-              </div>
+            <div className="flex justify-between items-center mt-3">
+              <button
+                onClick={handleClick}
+                className="px-3 py-1 bg-green-500 hover:bg-green-600 text-white font-medium rounded-2xl transition-colors text-sm sm:text-base"
+              >
+                Details
+              </button>
+              <CiHeart
+                onClick={handleSave}
+                size={24}
+                color={isSaved ? "red" : ""}
+                className="transition-colors hover:text-red-500"
+              />
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
