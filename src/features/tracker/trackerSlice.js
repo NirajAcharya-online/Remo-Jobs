@@ -65,6 +65,13 @@ const trackerSlice = createSlice({
     error: null,
     loading: false,
   },
+  reducers: {
+    clearStore: (state, action) => {
+      state.savedJobs = [];
+      state.error = null;
+      state.loading = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
 
@@ -102,3 +109,4 @@ const trackerSlice = createSlice({
 });
 
 export default trackerSlice.reducer;
+export const { clearStore } = trackerSlice.actions;

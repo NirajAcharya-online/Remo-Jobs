@@ -1,14 +1,13 @@
-import React, { useState } from "react";
 import Input from "../Input";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { firebaseAuth } from "../../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { setUser } from "../../firebase/database";
+import { toast } from "react-toastify";
 
 export default function Signup() {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
   const handleClick = () => {
     navigate("/login");
   };
@@ -23,6 +22,14 @@ export default function Signup() {
 
       if (response.user) {
         const databaseResponse = await setUser(response.user);
+        toast.success("Signup sucessfull..!", {
+          theme: "colored",
+          autoClose: 1500,
+          style: {
+            fontWeight: "bold",
+          },
+        });
+        navigate("/", { replace: true });
       }
     } catch (error) {
       console.log(error);
@@ -36,9 +43,9 @@ export default function Signup() {
   } = useForm();
 
   return (
-    <div className="flex items-center h-10/12  justify-center flex-col w-1/2 m-auto ">
+    <div className="flex items-center h-10/12  justify-center flex-col w-1/2  m-auto ">
       <form
-        className="w-1/2 bg-transparent border-2 p-10 rounded-2xl  border-black h-fit shadow-2xs flex flex-col items-center justify-center "
+        className=" lg:w-1/2 sm:w-full bg-transparent border-2 p-10 rounded-2xl  border-black h-fit shadow-2xs flex flex-col items-center justify-center "
         onSubmit={handleSubmit(handleSignup)}
       >
         <h2 className="font-bold text-xl font-mono text-gray-500 ">
@@ -59,6 +66,7 @@ export default function Signup() {
           })}
           label={"Username"}
           placeholder={"Username..."}
+          autoComplete={"off"}
         />
         {errors.username && (
           <p className="text-red-500 text-xs mt-1" role="alert">
@@ -76,6 +84,7 @@ export default function Signup() {
           placeholder={"Enter your email.."}
           type={"email"}
           label={"Email:"}
+          autoComplete={"off"}
         />
         {errors.email && (
           <p className="text-red-500 text-xs mt-1" role="alert">
@@ -95,6 +104,7 @@ export default function Signup() {
           placeholder={"Enter Your Password..."}
           type={"password"}
           label={"Password:"}
+          autoComplete={"new-password"}
         />
         {errors.password && (
           <p className="text-red-500 text-xs text-center mt-1" role="alert">
@@ -110,6 +120,7 @@ export default function Signup() {
           placeholder={"Confirm Your Password..."}
           type={"password"}
           label={"Confirm Password:"}
+          autoComplete={"off"}
         />
         {errors.confirmPassword && (
           <p className="text-red-500 text-xs text-center mt-1" role="alert">

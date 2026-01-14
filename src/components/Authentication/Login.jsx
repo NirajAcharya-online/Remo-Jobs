@@ -4,6 +4,7 @@ import { firebaseAuth } from "../../firebase/firebase";
 import Input from "../Input";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
@@ -17,7 +18,9 @@ function Login() {
     handleSubmit,
     watch,
     formState: { errors, isDirty, isSubmitting },
-  } = useForm();
+  } = useForm({
+    mode: "onTouched",
+  });
   const handleSignIn = async (data) => {
     try {
       const response = await signInWithEmailAndPassword(
@@ -28,7 +31,13 @@ function Login() {
       const { user } = response;
       if (user.accessToken) {
         console.log("SUCESS");
-
+        toast.success("Logged in sucessfully..!", {
+          theme: "colored",
+          autoClose: 1500,
+          style: {
+            fontWeight: "bold",
+          },
+        });
         navigate("/", { replace: true });
       }
     } catch (error) {
@@ -39,7 +48,7 @@ function Login() {
     <>
       <div className="flex items-center h-10/12  justify-center flex-col w-1/2 m-auto ">
         <form
-          className="w-1/2 bg-transparent border-2 p-10 rounded-2xl  border-black h-fit shadow-2xs flex flex-col items-center justify-center "
+          className=" lg:w-1/2 sm:w-full bg-transparent border-2 p-10 rounded-2xl  border-black h-fit shadow-2xs flex flex-col items-center justify-center "
           onSubmit={handleSubmit(handleSignIn)}
         >
           <h2 className="font-bold text-xl font-mono text-gray-500">
@@ -56,6 +65,7 @@ function Login() {
             placeholder={"Enter your email.."}
             type={"email"}
             label={"Email:"}
+            autoComplete={"off"}
           />
           {errors.email && (
             <p className="text-red-500 text-xs mt-1" role="alert">
@@ -75,7 +85,7 @@ function Login() {
             placeholder={"Enter Your Password..."}
             type={"password"}
             label={"Password:"}
-            autoComplete={"new-password"}
+            autoComplete={"current-password"}
           />
           {errors.password && (
             <p className="text-red-500 text-xs mt-1" role="alert">
@@ -92,6 +102,7 @@ function Login() {
             placeholder={"Confirm Your Password..."}
             type={"password"}
             label={"Confirm Password:"}
+            autoComplete="off"
           />
           {errors.confirmPassword && (
             <p className="text-red-500 text-xs text-center mt-1" role="alert">

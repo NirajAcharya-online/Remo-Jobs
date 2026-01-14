@@ -4,7 +4,6 @@ import { useSearchJobsQuery } from "../features/jobs/jobsApi";
 import JobsCard from "../components/JobsCard";
 import Error from "../components/Error.jsx";
 import useDebounce from "../components/Hooks/Debounce";
-import JobCardSkeleton from "../components/Skeleton/JobCardSkeleton";
 import SearchForJob from "../components/SearchForJob";
 import NoJobsFoundState from "../components/NoJobsFound";
 import { FourSquare } from "react-loading-indicators";

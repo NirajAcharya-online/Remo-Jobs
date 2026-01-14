@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   deleteSavedJob,
-  fetchSavedJobs,
   updateSavedJobs,
 } from "../features/tracker/trackerSlice";
-import { BsThreeDots } from "react-icons/bs";
+import { BlinkBlur } from "react-loading-indicators";
+import { toast } from "react-toastify";
 function JobsCard({ job }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,30 +16,45 @@ function JobsCard({ job }) {
   const { id, salary, company_logo, company_name, tags, title, description } =
     job;
   const [showMessage, setShowMessage] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const data = {
-    id,
-    salary,
-    description,
-    company_logo,
-    company_name,
-    tags,
-    title,
-  };
+  const loading = useSelector((state) => state.tracker.loading);
+
   const newTags = tags.slice(0, 5);
 
   const isSaved = savedJobs.some((j) => j.id === id);
   const handleSave = async () => {
     if (user) {
       if (!isSaved) {
-        dispatch(updateSavedJobs({ user, job }));
+        toast.promise(
+          dispatch(updateSavedJobs({ user, job })).unwrap(),
+          {
+            pending: "Saving the Job...",
+            success: "Job saved successfully! 👌",
+            error: "Failed to save the job 🤯",
+          },
+          { autoClose: 800 }
+        );
       } else {
-        dispatch(deleteSavedJob({ user, id }));
+        toast.promise(
+          dispatch(deleteSavedJob({ user, id })).unwrap(),
+          {
+            pending: "Removing job, please wait...",
+            success: "Job removed successfully! 👌",
+            error: "Failed to remove job 🤯",
+          },
+          { autoClose: 800 }
+        );
       }
     } else {
-      setShowMessage(true);
+      toast.error("Please Login to save....!", {
+        theme: "colored",
+        autoClose: 1500,
+        style: {
+          fontWeight: "bold",
+        },
+      });
     }
   };
+
   const handleClick = () => {
     navigate(`/jobs/${id}`);
   };
@@ -50,7 +65,7 @@ function JobsCard({ job }) {
           {showMessage && (
             <>
               <div className="flex items-center w-full justify-center">
-                <span className="font-bold text-xs font-mono text-red-500 text-center">
+                <span className="font-bold text-xl font-mono text-red-500 text-center">
                   Please Login to Save....!
                 </span>
               </div>
@@ -100,7 +115,16 @@ function JobsCard({ job }) {
                     fill={isSaved ? "red" : "white"}
                   />
                 </div>
-                <div>{loading && <BsThreeDots />}</div>
+                <div>
+                  {loading && (
+                    <BlinkBlur
+                      color="#32cd32"
+                      size="small"
+                      text=""
+                      textColor=""
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </div>

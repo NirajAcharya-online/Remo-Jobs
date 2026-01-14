@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import LogOut from "./Authentication/Logout";
+import AuthListener from "./Hooks/AuthListstner";
 function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,8 +16,9 @@ function NavBar() {
     navigate("/signup");
   };
   return (
-    <nav className="h-10 w-11/12 m-auto flex justify-between items-center">
-      <ul className="flex gap-20 p-2.5 text-blue-400 font-sans font-bold  justify-center items-center  ">
+    <nav className="h-10 w-11/12 m-auto  flex justify-between  items-center">
+      <AuthListener />
+      <ul className="flex gap-20 p-2.5 text-blue-400 font-sans font-bold justify-center items-center  ">
         <li className="hover:text-xl delay-150">
           <NavLink
             className={({ isActive }) => (isActive ? "text-red-400" : "")}
@@ -55,7 +57,7 @@ function NavBar() {
           </div>
         )}
         {showButtons && (
-          <div>
+          <div className="">
             <button
               onClick={handleLogin}
               className="py-1 rounded-2xl border hover:scale-3d border-green-300 hover:bg-green-400 cursor-pointer font-serif px-3 bg-green-300 ml-2"

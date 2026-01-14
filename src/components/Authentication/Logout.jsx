@@ -2,11 +2,24 @@ import React from "react";
 import { signOut } from "firebase/auth";
 import { firebaseAuth } from "../../firebase/firebase";
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { clearStore } from "../../features/tracker/trackerSlice";
 
 function LogOut() {
+  const dispatch = useDispatch();
   const handleClick = () => {
     signOut(firebaseAuth);
-    window.location.reload();
+
+    dispatch(clearStore());
+    toast.success("Logged out sucessfully..!", {
+      theme: "colored",
+      autoClose: 1500,
+      style: {
+        fontWeight: "bold",
+      },
+    });
+
     <Navigate to={"/"} />;
   };
   return (

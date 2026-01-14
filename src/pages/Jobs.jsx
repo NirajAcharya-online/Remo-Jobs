@@ -3,8 +3,7 @@ import { useGetRemoteJobsQuery } from "../features/jobs/jobsApi";
 import JobsCard from "../components/JobsCard";
 import JobFilters from "../components/JobFilters";
 import Error from "../components/Error.jsx";
-import JobCardSkeleton from "../components/Skeleton/JobCardSkeleton";
-import FilterSkeleton from "../components/Skeleton/FilterSkeleton";
+
 import { useSearchParams } from "react-router-dom";
 import NoJobsFoundState from "../components/NoJobsFound";
 import { FourSquare } from "react-loading-indicators";
@@ -54,7 +53,7 @@ function Jobs() {
   }
 
   return (
-    <div className="md:w-full sm:w-full m-auto lg:w-1/2 h-[90%] pt-30 pb-20 overflow-scroll overflow-x-hidden  scroll-smooth  ">
+    <div className="md:w-full sm:w-full mx-auto flex justify-center self-center lg:w-1/2 h-[90%] pt-30 pb-20 overflow-y-scroll overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth  ">
       {!isLoading && (
         <div className="flex flex-col">
           <JobFilters
