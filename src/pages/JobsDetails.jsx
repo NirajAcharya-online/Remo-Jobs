@@ -38,15 +38,22 @@ function JobsDetails() {
     );
   }
   return (
-    <div className=" max-h-full w-full">
-      <div className="ml-3 " onClick={handleClick}>
-        <Button bgColor=" white " className="w-8 h-8 hover:cursor-pointer ">
-          <IoArrowBackOutline className="h-8 w-8" />
+    <div className="w-full min-h-screen">
+      <div className="px-3 py-2">
+        <Button
+          bgColor="white"
+          className="w-8 h-8 hover:cursor-pointer flex items-center justify-center"
+          onClick={handleClick}
+        >
+          <IoArrowBackOutline className="h-6 w-6" />
         </Button>
       </div>
+
       {job && (
-        <div className="h-11/12 w-screen">
-          <JobDetailsCard data={job} />
+        <div className="w-full flex justify-center">
+          <div className="w-full max-w-4xl px-3 sm:px-4 md:px-6">
+            <JobDetailsCard data={job} />
+          </div>
         </div>
       )}
     </div>

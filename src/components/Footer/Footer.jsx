@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="w-full flex p-2 justify-center items-center">
+    <footer className="w-full flex p-2 justify-center mt-1 items-center">
       <p className="max-w-3xl text-xs text-center text-gray-600 leading-snug">
         Job listings displayed on this site are sourced from Remotive. We use
         the Remotive API to bring you remote job opportunities. For the full

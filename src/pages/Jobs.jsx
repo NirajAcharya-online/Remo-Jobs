@@ -53,7 +53,7 @@ function Jobs() {
   }
 
   return (
-    <div className="w-full max-w-6xl h-full mx-auto flex flex-col pt-6 pb-12 px-4 mt-7 overflow-y-auto scroll-smooth [&::-webkit-scrollbar]:hidden">
+    <div className="w-full max-w-6xl h-full mx-auto flex flex-col pt-6  pb-12 px-4 overflow-y-auto scroll-smooth [&::-webkit-scrollbar]:hidden">
       <JobFilters
         activeCategory={category}
         onChange={(newCategory) => setSearchParams({ category: newCategory })}

@@ -8,7 +8,8 @@ A production-style React application to search, filter, and explore remote jobs 
 - Error and empty-state handling
 - Skeleton loading UIs
 - RTK Query data caching (no unnecessary refetching)
-
+-Firebase Authent
+-Async Thunk Redux
 ---
 
 ## 🚀 Live Demo
@@ -18,7 +19,7 @@ A production-style React application to search, filter, and explore remote jobs 
 ---
 
 ## 🎯 Core Features
-
+ 
 - 🔍 Search jobs with debounce
 
   - avoids API spam

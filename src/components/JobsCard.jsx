@@ -6,7 +6,6 @@ import {
   deleteSavedJob,
   updateSavedJobs,
 } from "../features/tracker/trackerSlice";
-import { BlinkBlur } from "react-loading-indicators";
 import { toast } from "react-toastify";
 function JobsCard({ job }) {
   const navigate = useNavigate();
@@ -15,11 +14,7 @@ function JobsCard({ job }) {
   const savedJobs = useSelector((state) => state.tracker.savedJobs);
   const { id, salary, company_logo, company_name, tags, title, description } =
     job;
-  const [showMessage, setShowMessage] = useState(false);
-  const loading = useSelector((state) => state.tracker.loading);
-
   const newTags = tags.slice(0, 5);
-
   const isSaved = savedJobs.some((j) => j.id === id);
   const handleSave = async () => {
     if (user) {
@@ -31,7 +26,13 @@ function JobsCard({ job }) {
             success: "Job saved successfully! 👌",
             error: "Failed to save the job 🤯",
           },
-          { autoClose: 800 }
+          {
+            autoClose: 800,
+            style: {
+              backgroundColor: "#87be6d",
+              color: "#ffffff",
+            },
+          }
         );
       } else {
         toast.promise(
@@ -41,7 +42,13 @@ function JobsCard({ job }) {
             success: "Job removed successfully! 👌",
             error: "Failed to remove job 🤯",
           },
-          { autoClose: 800 }
+          {
+            autoClose: 800,
+            style: {
+              backgroundColor: "#cc6565",
+              color: "#ffffff",
+            },
+          }
         );
       }
     } else {
@@ -61,13 +68,6 @@ function JobsCard({ job }) {
   if (company_name && salary) {
     return (
       <div className="w-full sm:w-[300px] md:w-[320px] lg:w-[340px] bg-white rounded-3xl shadow-lg p-5 hover:shadow-2xl transition-transform transform hover:scale-105 cursor-pointer font-sans flex flex-col">
-        {showMessage && (
-          <div className="w-full mb-2 text-center">
-            <span className="text-red-600 font-bold text-sm sm:text-base">
-              Please Login to Save!
-            </span>
-          </div>
-        )}
         <div className="flex flex-col items-center gap-3">
           <img
             src={company_logo}
@@ -97,7 +97,7 @@ function JobsCard({ job }) {
             <div className="flex justify-between items-center mt-3">
               <button
                 onClick={handleClick}
-                className="px-3 py-1 bg-green-500 hover:bg-green-600 text-white font-medium rounded-2xl transition-colors text-sm sm:text-base"
+                className=" cursor-pointer px-3 py-1 bg-green-500 hover:bg-green-600 text-white font-medium rounded-2xl transition-colors text-sm sm:text-base"
               >
                 Details
               </button>
@@ -105,7 +105,7 @@ function JobsCard({ job }) {
                 onClick={handleSave}
                 size={24}
                 color={isSaved ? "red" : ""}
-                className="transition-colors hover:text-red-500"
+                className="transition-colors hover:text-green-800 hover:scale-105"
               />
             </div>
           </div>

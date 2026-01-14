@@ -40,7 +40,7 @@ function Login() {
         navigate("/", { replace: true });
       }
     } catch (error) {
-      setError(error);
+      toast.error(`${error.message}`);
     }
   };
   return (

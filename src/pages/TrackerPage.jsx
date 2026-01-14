@@ -4,16 +4,21 @@ import { Slab } from "react-loading-indicators";
 import Error from "../components/Error";
 function TrackerPage() {
   const { savedJobs, error, loading } = useSelector((state) => state.tracker);
+  const FullCenter = ({ children }) => (
+    <div className="h-[70vh] w-full flex justify-center items-center">
+      {children}
+    </div>
+  );
   if (loading) {
     return (
-      <div className="w-full flex h-11/12 overflow-hidden justify-center items-center gap-2   ">
+      <FullCenter>
         <Slab
           color="#234123"
           size="medium"
           text="Saved  Jobs..."
           textColor="#46c82f"
         />
-      </div>
+      </FullCenter>
     );
   }
   if (error) {
@@ -22,24 +27,7 @@ function TrackerPage() {
     </div>;
   }
   return (
-    <div className="w-full max-w-6xl mx-auto flex flex-col pt-6 pb-12 px-4 h-[90vh] overflow-y-auto scroll-smooth [&::-webkit-scrollbar]:hidden">
-      {loading && (
-        <div className="w-full h-full flex justify-center items-center mt-10">
-          <Slab
-            color="#234123"
-            size="medium"
-            text="Saved Jobs..."
-            textColor="#46c82f"
-          />
-        </div>
-      )}
-
-      {error && !loading && (
-        <div className="w-full flex justify-center items-center mt-10">
-          <Error />
-        </div>
-      )}
-
+    <div className="w-full max-w-6xl mx-auto flex flex-col pt-6 pb-12 px-4 h-11/12 overflow-y-auto scroll-smooth [&::-webkit-scrollbar]:hidden">
       {savedJobs.length > 0 && (
         <h2 className="text-center text-2xl sm:text-3xl font-bold text-red-700 mt-4 mb-6">
           Saved Jobs

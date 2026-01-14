@@ -10,10 +10,11 @@ import PrivateRoute from "./components/Authentication/PrivateRoute";
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
 import AuthListener from "./components/Hooks/AuthListstner";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
-    <div className="h-screen w-full ">
+    <div className="h-screen  w-full ">
       <AuthListener />
       <Header />
       <div className="h-10/12 w-full mb-0">
@@ -31,6 +32,7 @@ function App() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>

@@ -22,6 +22,7 @@ export default function Signup() {
 
       if (response.user) {
         const databaseResponse = await setUser(response.user);
+        navigate("/", { replace: true });
         toast.success("Signup sucessfull..!", {
           theme: "colored",
           autoClose: 1500,
@@ -29,10 +30,9 @@ export default function Signup() {
             fontWeight: "bold",
           },
         });
-        navigate("/", { replace: true });
       }
     } catch (error) {
-      console.log(error);
+      toast.error(`${error.message}`);
     }
   };
   const {
@@ -136,7 +136,7 @@ export default function Signup() {
                     }`}
           disabled={isSubmitting || !isDirty}
         >
-          Sign-Up
+          {isSubmitting ? "Loading..." : "Sign Up"}
         </button>
 
         <div className="flex justify-center items-center gap-1 text-xs mt-4">

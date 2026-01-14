@@ -18,7 +18,7 @@ function NavBar() {
   const handleSignup = () => navigate("/signup");
 
   return (
-    <nav className="w-full h-[20px] max-w-6xl mx-auto flex items-center justify-between p-6 relative">
+    <nav className="w-full max-w-6xl mx-auto flex items-center justify-between p-6 relative">
       <AuthListener />
 
       <div className="text-lg font-bold text-blue-500">REMO-JOB</div>
@@ -32,14 +32,7 @@ function NavBar() {
             Home
           </NavLink>
         </li>
-        <li className="hover:text-xl transition">
-          <NavLink
-            className={({ isActive }) => (isActive ? "text-red-400" : "")}
-            to="/jobs"
-          >
-            Explore Jobs
-          </NavLink>
-        </li>
+
         <li className="hover:text-xl transition">
           <NavLink
             className={({ isActive }) => (isActive ? "text-red-400" : "")}
@@ -50,7 +43,6 @@ function NavBar() {
         </li>
       </ul>
 
-      {/* Desktop Right Side */}
       <div className="hidden md:flex items-center gap-4">
         {!showButtons && (
           <span className="text-xs text-blue-400 font-bold">
@@ -75,7 +67,7 @@ function NavBar() {
           </>
         )}
       </div>
-      <div className="md:hidden flex items-center">
+      <div className="md:hidden flex  items-center">
         <button onClick={toggleMenu} className="focus:outline-none">
           <div
             className="w-6 h-0.5 bg-blue-400 mb-1 transition-transform"
@@ -110,13 +102,7 @@ function NavBar() {
           >
             Home
           </NavLink>
-          <NavLink
-            onClick={() => setIsMenuOpen(false)}
-            className="text-blue-400 font-bold"
-            to="/jobs"
-          >
-            Explore Jobs
-          </NavLink>
+      
           <NavLink
             onClick={() => setIsMenuOpen(false)}
             className="text-blue-400 font-bold"
