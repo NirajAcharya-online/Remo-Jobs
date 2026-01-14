@@ -1,64 +1,34 @@
-# Remo-Jobs – Remote Job Finder
+# Remote Jobs Finder
 
-A production-style React application to search, filter, and explore remote jobs with real-world UX patterns:
+A responsive frontend application to browse remote jobs, view details, and save favorites.
 
-- Debounced search
-- Category filters
-- Job details page
-- Error and empty-state handling
-- Skeleton loading UIs
-- RTK Query data caching (no unnecessary refetching)
--Firebase Authent
--Async Thunk Redux
----
+## What this project does
 
-## 🚀 Live Demo
+- Lists remote jobs with filters
+- Shows detailed job information
+- Allows saving and unsaving jobs
+- Syncs saved jobs with database
+- Handles loading, error, and empty states cleanly
+- Works on mobile and desktop
 
-(https://remo-jobs.vercel.app/)
-
----
-
-## 🎯 Core Features
- 
-- 🔍 Search jobs with debounce
-
-  - avoids API spam
-  - fetch starts only when query length ≥ 3
-
-- 🎚️ Category-based filtering
-
-  - software, design, sales, product, finance, others
-
-- 📄 Job details page
-
-  - opened using URL params
-
-- ⏳ Skeleton loaders
-
-  - different loaders for different pages
-
-- 🚨 Centralized error component
-
-  - customizable message and navigation
-
-- ⚡ RTK Query caching
-
-  - instant reload on revisit
-  - prevents useless refetching
-
-- 🧩 Clean separation of concerns
-  - Search page and Filter page are independent
-  - logic not mixed together
-
----
-
-## 🛠️ Tech Stack
+## Tech Used
 
 - React
+- Redux Toolkit (Async Thunks)
 - React Router
-- Redux Toolkit + RTK Query
+- Firebase Authentication
 - Tailwind CSS
-- Vite
-- Custom React Hooks
+- Vercel (deployment)
 
----
+## Main Features
+
+- User authentication (login / logout)
+- Save jobs per user
+- Realtime UI updates on save/delete
+- Search and category filter
+- Dedicated job description page
+- Toast notifications and skeleton loaders
+
+## Live Demo
+
+https://remo-jobs.vercel.app/
