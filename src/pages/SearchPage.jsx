@@ -7,6 +7,7 @@ import JobsCard from "../components/JobsCard";
 import useDebounce from "../components/Hooks/Debounce";
 import { useSearchJobsQuery } from "../features/jobs/jobsApi";
 import SearchForJob from "../components/SearchForJob";
+import Container from "../components/Container/Container";
 function SearchPage() {
   const [value, setValue] = useState("");
   const debouncedSearch = useDebounce(value.trim(), 200);
@@ -21,22 +22,16 @@ function SearchPage() {
   const hasJobs = jobs.length > 0;
   const isEmpty = !isLoading && !isFetching && !hasJobs && !isIdle;
 
-  const FullCenter = ({ children }) => (
-    <div className="h-[70vh] w-full flex justify-center items-center">
-      {children}
-    </div>
-  );
-
   if (isLoading || isFetching) {
     return (
-      <FullCenter>
+      <Container>
         <FourSquare
           color="#78896b"
           size="large"
           text="Getting Jobs"
           textColor="#4dc418"
         />
-      </FullCenter>
+      </Container>
     );
   }
 

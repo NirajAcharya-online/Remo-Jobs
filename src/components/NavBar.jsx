@@ -24,7 +24,7 @@ function NavBar() {
       <div className="text-lg font-bold text-blue-500">REMO-JOB</div>
 
       <ul className="hidden md:flex gap-8 text-blue-400 font-bold items-center">
-        <li className="hover:text-xl transition">
+        <li>
           <NavLink
             className={({ isActive }) => (isActive ? "text-red-400" : "")}
             to="/"
@@ -33,12 +33,12 @@ function NavBar() {
           </NavLink>
         </li>
 
-        <li className="hover:text-xl transition">
+        <li>
           <NavLink
             className={({ isActive }) => (isActive ? "text-red-400" : "")}
-            to="/tracker"
+            to="/dashboard"
           >
-            Saved Jobs
+            Dashboard
           </NavLink>
         </li>
       </ul>
@@ -102,13 +102,13 @@ function NavBar() {
           >
             Home
           </NavLink>
-      
+
           <NavLink
             onClick={() => setIsMenuOpen(false)}
             className="text-blue-400 font-bold"
-            to="/tracker"
+            to="/dashboard"
           >
-            Saved Jobs
+            Dashboard
           </NavLink>
 
           {!showButtons && (

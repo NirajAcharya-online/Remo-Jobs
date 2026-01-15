@@ -38,7 +38,7 @@ function JobsDetails() {
     );
   }
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full h-11/12 pb-10 p-4">
       <div className="px-3 py-2">
         <Button
           bgColor="white"

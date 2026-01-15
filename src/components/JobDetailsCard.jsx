@@ -8,7 +8,6 @@ function JobDetailsCard({ data }) {
     setShowDescription((prev) => !prev);
   };
 
-
   if (data.length > 0) {
     return (
       <div className="h-full w-full flex  flex-col items-center">
@@ -24,10 +23,10 @@ function JobDetailsCard({ data }) {
             ⌨️ {data[0].title}
           </h1>
           <h3 className="text-center font-mono text-blue-500">
-           🌍 {data[0].candidate_required_location}
+            🌍 {data[0].candidate_required_location}
           </h3>
           <p className="text-center font-serif p-4 text-gray-600 font-semibold">
-           💸 {data[0].salary}
+            💸 {data[0].salary}
           </p>
         </div>
         <div className="p-4 flex gap-4 flex-col justify-center items-center ">

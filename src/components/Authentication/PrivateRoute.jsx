@@ -2,21 +2,23 @@ import { useEffect, useState } from "react";
 import { Slab } from "react-loading-indicators";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import Container from "../Container/Container";
 
 function PrivateRoute({ children }) {
   const user = useSelector((state) => state.user.userDetails);
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
+    const timer = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
   if (loading) {
     return (
-      <div className="w-11/12  overflow-hidden pl-20  gap-2 pt-35 flex flex-col items-center ">
+      <div className="flex flex-col items-center justify-center min-h-[300px] w-full p-8 transition-opacity duration-300">
         <Slab
           color="#234123"
           size="medium"
-          text="Saved  Jobs..."
+          text="Authenticating..."
           textColor="#46c82f"
         />
       </div>
