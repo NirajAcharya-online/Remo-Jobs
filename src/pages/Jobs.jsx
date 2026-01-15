@@ -24,32 +24,9 @@ function Jobs() {
     : !isLoading && jobs.length === 0
     ? "empty"
     : "success";
-  if (uiState === "loading") {
-    return (
-      <div className="min-w-1/2 h-11/12 overflow-hidden pl-15 m-auto  gap-2 pt-35 flex flex-col items-center ">
-        <FourSquare
-          color="#78896b"
-          size="large"
-          text="Getting Jobs"
-          textColor="#4dc418"
-        />
-      </div>
-    );
-  }
+
   if (uiState === "error") {
     return <Error onRetry={refetch} />;
-  }
-  if (uiState === "fetching") {
-    return (
-      <div className="md:w-full lg-w-  h-11/12 m-auto gap-2 pl-15 pt-35 overflow-hidden flex justify-center items-center ">
-        <FourSquare
-          color="#78896b"
-          size="large"
-          text="Getting Jobs"
-          textColor="#4dc418"
-        />
-      </div>
-    );
   }
 
   return (

@@ -22,9 +22,9 @@ const Dashboard = () => {
     const details = await getUser(users);
     setUserDetails(details);
     setFormDetails({
-      location: details.location || "",
-      role: details.role || "",
-      availibility: details.availibility || "",
+      location: details?.location || "",
+      role: details?.role || "",
+      availibility: details?.availibility || "",
     });
     setLoading(false);
   }
