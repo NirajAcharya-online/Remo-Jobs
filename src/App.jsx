@@ -15,7 +15,7 @@ import DashboardPage from "./pages/DashboardPage";
 
 function App() {
   return (
-    <div className="h-screen bg-gray-100 w-full ">
+    <div className="h-screen  w-full ">
       <AuthListener />
       <Header />
       <div className="h-10/12 w-full mb-0">

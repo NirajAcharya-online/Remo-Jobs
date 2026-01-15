@@ -10,55 +10,54 @@ function JobDetailsCard({ data }) {
 
   if (data.length > 0) {
     return (
-      <div className="h-full w-full flex  flex-col items-center">
-        <div className="h-28 w-28">
-          <img
-            src={data[0].company_logo}
-            className="w-full h-full"
-            alt={data[0].company_name}
-          />
-        </div>
-        <div className="shadow-2xl p-4 hover:scale-105 ">
-          <h1 className="text-center font-bold font-serif text-xl text-gray-400 p-4">
-            ⌨️ {data[0].title}
-          </h1>
-          <h3 className="text-center font-mono text-blue-500">
-            🌍 {data[0].candidate_required_location}
-          </h3>
-          <p className="text-center font-serif p-4 text-gray-600 font-semibold">
-            💸 {data[0].salary}
-          </p>
-        </div>
-        <div className="p-4 flex gap-4 flex-col justify-center items-center ">
-          <div className="flex gap-4">
+      <div className="h-full w-full flex flex-col items-center overflow-hidden bg-white rounded-2xl shadow-2xl border border-gray-100">
+        <div className="flex flex-col items-center shrink-0 p-4 border-b border-gray-50 w-full">
+          <div className="h-16 w-16 md:h-20 md:w-20">
+            <img
+              src={data[0].company_logo}
+              className="w-full h-full object-contain"
+              alt={data[0].company_name}
+            />
+          </div>
+          <div className="text-center mt-2">
+            <h1 className="font-bold font-serif text-lg md:text-xl text-gray-700 px-2">
+              {data[0].title}
+            </h1>
+            <p className="text-blue-500 font-mono text-xs md:text-sm">
+              🌍 {data[0].candidate_required_location}
+            </p>
+            <p className="text-gray-500 font-serif text-xs md:text-sm font-bold">
+              💸 {data[0].salary || "Not Specified"}
+            </p>
+          </div>
+
+          <div className="flex gap-3 mt-4">
             <Button
               bgColor="bg-blue-300"
-              className="font-serif cursor-pointer hover:scale-105 delay-300 hover:bg-blue-400 max-w-fit"
-              textColor="text-gray-700 p-2 font-bold "
+              className="font-serif cursor-pointer hover:bg-blue-400 px-4 py-1.5 rounded-lg text-xs md:text-sm font-bold"
               onClick={hanldleClick}
             >
-              {showDescription && <p>Hide Description</p>}
-              {!showDescription && <p>Show Description</p>}
+              {showDescription ? "Hide Info" : "Show Info"}
             </Button>
-            <Button
-              bgColor="bg-green-300"
-              className="font-serif cursor-pointer hover:scale-105 delay-300 hover:bg-green-400 max-w-fit"
-              textColor="text-gray-700 p-2 font-bold "
-            >
-              <a href={data[0].url} target="_blank">
-                Visit Remotive
-              </a>
-            </Button>
+            <a href={data[0].url} target="_blank" rel="noreferrer">
+              <Button
+                bgColor="bg-green-300"
+                className="font-serif cursor-pointer hover:bg-green-400 px-4 py-1.5 rounded-lg text-xs md:text-sm font-bold"
+              >
+                Apply
+              </Button>
+            </a>
           </div>
-          {showDescription && (
+        </div>
+
+        {showDescription && (
+          <div className="flex-1 w-full overflow-y-auto min-h-0 p-4 md:p-6 bg-gray-50/30 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             <Description
-              className={
-                "max-w-11/12 m-auto p-4 h-96 overflow-y-scroll overflow-x-hidden font-serif rounded-2xl shadow-2xl "
-              }
+              className="font-serif text-gray-600 leading-relaxed text-sm md:text-base"
               description={data[0].description}
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     );
   }
