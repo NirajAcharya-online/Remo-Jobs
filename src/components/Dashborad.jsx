@@ -55,7 +55,7 @@ const Dashboard = () => {
 
   if (loading) return <DashboardSkeleton />;
   return (
-    <div className="min-h-11/12 bg-gray-50 p-4 md:p-12">
+    <div className="min-h-11/12 bg-gray-50 p-4 mt-10 md:p-12">
       <div className="max-w-3xl mx-auto">
         <header className="mb-8 flex justify-between items-end">
           <div>
